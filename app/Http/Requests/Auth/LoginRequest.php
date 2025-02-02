@@ -22,15 +22,35 @@ class LoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                function ($attribute, $value, $fail) {
+                    if (!str_ends_with($value, '@gmail.com')) {
+                        $fail('El correo debe ser una dirección de Gmail.');
+                    }
+                },
+            ],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/', // Alfanumérico
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/', $value)) {
+                        $fail('La contraseña debe ser alfanumérica y contener al menos una letra y un número.');
+                    }
+                },
+            ],
         ];
     }
+
 
     /**
      * Attempt to authenticate the request's credentials.
@@ -80,6 +100,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->string('email')) . '|' . $this->ip());
     }
 }
