@@ -10,13 +10,26 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
             </div>
+
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('centro.index')" :active="request()->routeIs('centro.index')">
+                        {{ __('Gestión de Centros') }}
+                    </x-nav-link>
+                </div>
+
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
+                        {{ __('Usuarios') }}
+                    </x-nav-link>
+                </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
