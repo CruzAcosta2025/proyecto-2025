@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 
-class CentroController extends Controller
+class CentroMedicoController extends Controller
 {
+    public function create()
+    {
+        return view('ViewAgregarCentro');
+    }
     
+
 }

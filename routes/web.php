@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CentroController;
+use App\Http\Controllers\CentroMedicoController;
 use App\Http\Controllers\UsuarioController;
 
 Route::get('/', function () {
@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/centro', [CentroController::class, 'index'])->name('centro.index');
+Route::get('/centros-medico/agregar', [CentroMedicoController::class, 'create'])->name('centros-medicos-create');
 
 Route::get('/users', [UsuarioController::class, 'index'])->name('usuarios.index');
 
