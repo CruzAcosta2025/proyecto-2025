@@ -19,7 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/centros-medico/agregar', [CentroMedicoController::class, 'create'])->name('centros-medicos-create');
+
+Route::resource('centros', CentroMedicoController::class);
+
 
 Route::get('/users', [UsuarioController::class, 'index'])->name('usuarios.index');
 
